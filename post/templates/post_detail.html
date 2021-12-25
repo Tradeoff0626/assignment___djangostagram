@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<div class="row mt-5">
+	<div class="col-12">
+		<div class="card mb-5">
+			<img src="{{ post.imageurl }}" style="display: block; margin: 0 auto; width:700px; height:700px;" 
+						class="card-img-top" alt="{{ post.imageurl }}">
+			<div class="card-body">
+				<p class="card-text"><b>{{ post.writer }}</b></p>
+				<p class="card-text">{{ post.contents }}</p>
+				<p class="card-text">tag : 
+					{{ post.tags.all|join:", " }}
+				</p>
+				<p class="card-text"><small class="text-muted">{{ post.registered_dttm }}</small></p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row mt-5">
+	<div class="col-12">
+		<button class="btn btn-primary btn-block" onclick="location.href='/'">돌아가기</button>
+	</div>
+</div>
+{% endblock  %}

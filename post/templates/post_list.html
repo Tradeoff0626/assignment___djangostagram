@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<div class="row mt-5">
+	<div class="col-12">
+	{% if dsuser %}
+		<h3>Hello, {{ dsuser.userid }}<h3>
+	{% endif %}
+	</div>
+</div>
+<div class="row mt-5">
+	<div class="col-12">
+	{% for post in posts %}
+		<div class="card mb-5" onclick="location.href='/post/{{ post.id }}'">
+			<img src="{{ post.imageurl }}" style="display: block; margin: 0 auto; width:350px; height:350px;" 
+						class="card-img-top" alt="{{ post.imageurl }}">
+			<div class="card-body">
+				<h5 class="card-title"></h5>
+				<p class="card-text">{{ post.writer }}</p>
+				<p class="card-text"><small class="text-muted">{{ post.registered_dttm }}</small></p>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+</div>	
+<div class="row mt-5">
+	<div class="col-12">
+		<nav>
+			<ul class="pagination justify-content-center">
+				{% if posts.has_previous %}
+				<li class="page-item">	
+					<a class="page-link" href="?p={{ posts.previous_page_number }}">이전으로</a>
+				</li>
+				{% else %}
+				<li class="page-item disabled">	
+					<a class="page-link" href="#">이전으로</a>
+				</li>
+				{% endif %}
+				<li class="page-item active">
+					<a class="page-link" href="#">{{ posts.number }} / {{ posts.paginator.num_pages }}</a>
+				{% if posts.has_next %}
+				<li class="page-item">
+					<a class="page-link" href="?p={{ posts.next_page_number }}">다음으로</a>
+				</li>
+				{% else %}
+				<li class="page-item disabled">
+					<a class="page-link" href="#">다음으로</a>
+				</li>
+				{% endif %}
+			</ul>
+		</nav>
+	</div>
+</div>
+<div class="row mt-5">
+	<div class="col-12">
+		<button type="submit" class="btn btn-primary" onclick="location.href='/upload'">글 쓰기</button>
+	</div>
+</div>
+{% endblock  %}
